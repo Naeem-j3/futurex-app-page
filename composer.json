@@ -1,0 +1,32 @@
+{
+    "name": "futurex/app-page",
+    "description": "A Laravel package for app landing pages with analytics, screenshots, features, and Filament admin panel.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "filament",
+        "landing page",
+        "app page",
+        "analytics",
+        "package"
+    ],
+    "support": {
+        "issues": "https://github.com/futurex/app-page/issues",
+        "source": "https://github.com/futurex/app-page"
+    },
+    "autoload": {
+        "psr-4": {
+            "FutureX\\AppPage\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FutureX\\AppPage\\AppPageServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
