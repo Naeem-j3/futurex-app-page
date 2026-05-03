@@ -14,6 +14,7 @@ class AppPageServiceProvider extends ServiceProvider
         $this->app->register(
             \FutureX\AppPage\Filament\AppPagePanelProvider::class
         );
+
     }
 
     public function boot(): void
