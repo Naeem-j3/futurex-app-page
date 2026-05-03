@@ -12,6 +12,7 @@ use FutureX\AppPage\Filament\Widgets\AppPageVisitsChart;
 use FutureX\AppPage\Filament\Widgets\ClicksChart;
 use FutureX\AppPage\Filament\Widgets\DeviceChart;
 use FutureX\AppPage\Filament\Widgets\TopCountriesChart;
+use FutureX\AppPage\Filament\Widgets\UserState;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Session\Middleware\StartSession;
@@ -48,7 +49,8 @@ class AppPagePanelProvider extends PanelProvider
                 AppPageVisitsChart::class,
                 ClicksChart::class,
                 DeviceChart::class,
-                TopCountriesChart::class
+                TopCountriesChart::class,
+                UserState::class
             ])
             // 🔥 هذا هو الحل
             ->middleware([
@@ -64,7 +66,7 @@ class AppPagePanelProvider extends PanelProvider
             ])
 
             ->authMiddleware([
-                Authenticate::class,
+                \FutureX\AppPage\Http\Middleware\AuthorizeAdmin::class,
             ]);
     }
 }

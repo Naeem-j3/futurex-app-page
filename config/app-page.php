@@ -6,5 +6,7 @@ return [
     'track_visits' => true,
 
     'track_duration' => true,
-
+    'allowed_emails' => [
+        'admin@gmail.com',
+    ],
 ];

@@ -96,7 +96,9 @@
             overflow-x: auto;
             padding-bottom: 12px;
             scroll-snap-type: x mandatory;
+            /*height: 200px;*/
             -webkit-overflow-scrolling: touch;
+
         }
         .screenshots-track::-webkit-scrollbar { height: 4px; }
         .screenshots-track::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9px; }
@@ -104,7 +106,8 @@
         .screenshot-item {
             scroll-snap-align: start;
             flex: 0 0 auto;
-            width: 260px;
+            width: 360px;
+            height: 300px;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0,0,0,.10);
@@ -149,7 +152,7 @@
         }
 
         @media (max-width: 640px) {
-            .screenshot-item { width: 200px; }
+            .screenshot-item { width: 290px; height: 240px;}
         }
     </style>
 </head>
@@ -225,7 +228,7 @@
 </section>
 {{-- ════════════════ ABOUT / DESCRIPTION ════════════════ --}}
 @if($app?->description)
-    <section style="max-width:900px;margin:20px auto 52px;padding:0 24px;">
+    <section style="max-width:1200px;margin:20px auto 52px;padding:0 24px;">
         <div style="background:#fff;border-radius:20px;border:1px solid #e2e8f0;padding:36px;">
             <h2 class="section-title" style="margin-bottom:16px;">عن التطبيق</h2>
             <p style="font-size:16px;color:#475569;line-height:1.8;margin:0;">{{ $app->description }}</p>
@@ -234,7 +237,7 @@
 @endif
 {{-- ════════════════ SCREENSHOTS ════════════════ --}}
 @if($app->images->isNotEmpty())
-    <section style="max-width:900px;margin:52px auto;padding:0 24px;">
+    <section style="max-width:1200px;margin:52px auto;padding:0 24px;">
 
         <h2 class="section-title" style="margin-bottom:24px;">لقطات التطبيق</h2>
 
@@ -258,7 +261,7 @@
 
 {{-- ════════════════ FEATURES ════════════════ --}}
 @if($app->features->isNotEmpty())
-    <section style="max-width:900px;margin:0 auto 52px;padding:0 24px;">
+    <section style="max-width:1200px;margin:0 auto 52px;padding:0 24px;">
 
         <h2 class="section-title" style="margin-bottom:28px;">مزايا التطبيق</h2>
 
@@ -317,7 +320,7 @@
 @endif
 {{-- ════════════════ FOOTER ════════════════ --}}
 <footer style="background:var(--secondary);padding:48px 24px 24px;">
-    <div style="max-width:900px;margin:0 auto;">
+    <div style="max-width:1200px;margin:0 auto;">
 
         {{-- Top row: logo + columns --}}
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-bottom:36px;">

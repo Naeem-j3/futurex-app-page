@@ -43,3 +43,14 @@ Clear caches:
 ```bash
 php artisan optimize:clear
 ```
+---
+### optionally Publish 
+Publish views
+
+```bash
+php artisan vendor:publish --tag=app-page-views
+```
+Publish config
+```bash
+php artisan vendor:publish --tag=app-page-config
+```

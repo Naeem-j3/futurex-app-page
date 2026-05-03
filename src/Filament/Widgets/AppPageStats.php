@@ -19,10 +19,10 @@ class AppPageStats extends BaseWidget
         $yesterdayVisits  = AppPageVisit::whereDate('created_at', now()->subDay())->count();
         $totalClicks      = AppPageClick::count();
         $googleClicks     = AppPageClick::where('type', 'google')->count();
-
+        $totalDuration = AppPageVisit::sum('duration');
         $visitTrend = $this->getTrend(AppPageVisit::class, 7);
         $clickTrend = $this->getTrend(AppPageClick::class, 7);
-
+        $totalDurationTrend =  $this->getTrend(AppPageVisit::class, 7);
         $todayChange = $yesterdayVisits > 0
             ? round((($todayVisits - $yesterdayVisits) / $yesterdayVisits) * 100)
             : 100;
@@ -54,10 +54,10 @@ class AppPageStats extends BaseWidget
                 ->chart($clickTrend)
                 ->color('warning'),
 
-            Stat::make('Google Clicks', number_format($googleClicks))
-                ->description("{$googleRate}% of total clicks")
-                ->descriptionIcon('heroicon-m-magnifying-glass')
-                ->chart($clickTrend)
+            Stat::make('Total Time', $this->formatDuration($totalDuration))
+                ->description('Total time spent by all users')
+                ->descriptionIcon('heroicon-m-clock')
+                ->chart($totalDurationTrend)
                 ->color('success'),
         ];
     }
@@ -69,5 +69,25 @@ class AppPageStats extends BaseWidget
             $data[] = $model::whereDate('created_at', now()->subDays($i))->count();
         }
         return $data;
+    }
+    private function formatDuration($seconds): string
+    {
+        $seconds = (int) $seconds;
+
+        if ($seconds < 60) {
+            return $seconds . ' sec';
+        }
+
+        $minutes = floor($seconds / 60);
+        $remainingSeconds = $seconds % 60;
+
+        if ($minutes < 60) {
+            return $minutes . ' min ' . $remainingSeconds . ' sec';
+        }
+
+        $hours = floor($minutes / 60);
+        $remainingMinutes = $minutes % 60;
+
+        return $hours . ' h ' . $remainingMinutes . ' min';
     }
 }
