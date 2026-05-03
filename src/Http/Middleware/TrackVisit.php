@@ -22,7 +22,18 @@ class TrackVisit
                 $request->session()->put('fx_session', $sessionId);
             }
 
-            $location = Location::get($request->ip());
+
+            $location = null;
+
+            try {
+                $ip = $request->ip();
+
+                if (!in_array($ip, ['127.0.0.1', '::1'])) {
+                    $location = Location::get($ip);
+                }
+            } catch (\Throwable $e) {
+                $location = null;
+            }
 
             // ✅ Create visit BEFORE the view renders
             $visit = AppPageVisit::create([
