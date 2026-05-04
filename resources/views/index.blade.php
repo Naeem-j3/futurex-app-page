@@ -154,6 +154,12 @@
         @media (max-width: 640px) {
             .screenshot-item { width: 290px; height: 240px;}
         }
+        @media (max-width: 768px) {
+            #footer-grid {
+                grid-template-columns: 1fr !important;
+                gap: 32px !important;
+            }
+        }
     </style>
 </head>
 
@@ -258,118 +264,165 @@
 @endif
 
 
-
-{{-- ════════════════ FEATURES ════════════════ --}}
-@if($app->features->isNotEmpty())
-    <section style="max-width:1200px;margin:0 auto 52px;padding:0 24px;">
-
-        <h2 class="section-title" style="margin-bottom:28px;">مزايا التطبيق</h2>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
-
-            @foreach($app->features as $feature)
-                <div style="background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:24px;
-                    display:flex;align-items:flex-start;gap:16px;">
-
-                    {{-- أيقونة الميزة --}}
-                    @if($feature->icon)
-                        <div style="width:44px;height:44px;border-radius:12px;
-                        background:color-mix(in srgb, var(--primary) 12%, white);
-                        display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <x-dynamic-component
-                                :component="'heroicon-o-'.$feature->icon"
-                                style="width:22px;height:22px;color:var(--primary);"
-                            />
-                        </div>
-                    @else
-                        <div style="width:44px;height:44px;border-radius:12px;
-                        background:color-mix(in srgb, var(--primary) 12%, white);
-                        display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                                 stroke="var(--primary)" stroke-width="2" stroke-linecap="round">
-                                <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806
-                             3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806
-                             3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946
-                             3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946
-                             3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806
-                             3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806
-                             3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946
-                             3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946
-                             3.42 3.42 0 013.138-3.138z"/>
-                            </svg>
-                        </div>
-                    @endif
-
-                    {{-- النص --}}
-                    <div>
-                        <h3 style="font-size:16px;font-weight:700;color:#0f172a;margin:0 0 6px;">
-                            {{ $feature->title }}
-                        </h3>
-                        @if($feature->description)
-                            <p style="font-size:14px;color:#64748b;line-height:1.7;margin:0;">
-                                {{ $feature->description }}
-                            </p>
-                        @endif
-                    </div>
-
-                </div>
-            @endforeach
-
-        </div>
-    </section>
-@endif
 {{-- ════════════════ FOOTER ════════════════ --}}
-<footer style="background:var(--secondary);padding:48px 24px 24px;">
+<footer style="background:var(--secondary);padding:56px 24px 0;">
     <div style="max-width:1200px;margin:0 auto;">
 
-        {{-- Top row: logo + columns --}}
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-bottom:36px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;margin-bottom:70px;" id="footer-grid">
 
-            {{-- Col 1: Brand --}}
-
-
-
-            {{-- Col 2: روابط التحميل --}}
-
-
-            {{-- Col 3: بيانات التواصل --}}
+            {{-- Col 1: Brand + Description --}}
             @if($app?->email || $app?->phone || $app?->address)
                 <div>
-                    <h4 style="color:rgba(255,255,255,.55);font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin:0 0 14px;">تواصل معنا</h4>
-                    <div style="display:flex;flex-direction:column;gap:10px;">
-
-                        @if($app?->email)
-                            <a href="mailto:{{ $app->email }}"
-                               style="color:rgba(255,255,255,.8);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:8px;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                {{ $app->email }}
-                            </a>
-                        @endif
+                    <h4 style="color:#fff;font-size:14px;font-weight:700;margin:0 0 20px;padding-bottom:10px;
+                               border-bottom:1px solid rgba(255,255,255,.1);">تواصل معنا</h4>
+                    <div style="display:flex;flex-direction:column;gap:14px;">
 
                         @if($app?->phone)
                             <a href="tel:{{ $app->phone }}"
-                               style="color:rgba(255,255,255,.8);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:8px;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.36 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                               style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;
+                                      display:flex;align-items:center;gap:10px;"
+                               onmouseover="this.style.color='rgba(255,255,255,1)'"
+                               onmouseout="this.style.color='rgba(255,255,255,.6)'">
+                                <span style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.08);
+                                             display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.36 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </span>
                                 {{ $app->phone }}
                             </a>
                         @endif
 
+                        @if($app?->email)
+                            <a href="mailto:{{ $app->email }}"
+                               style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;
+                                      display:flex;align-items:center;gap:10px;"
+                               onmouseover="this.style.color='rgba(255,255,255,1)'"
+                               onmouseout="this.style.color='rgba(255,255,255,.6)'">
+                                <span style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.08);
+                                             display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </span>
+                                {{ $app->email }}
+                            </a>
+                        @endif
+
                         @if($app?->address)
-                            <span style="color:rgba(255,255,255,.8);font-size:14px;display:flex;align-items:center;gap:8px;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        {{ $app->address }}
-                    </span>
+                            <span style="color:rgba(255,255,255,.6);font-size:14px;
+                                         display:flex;align-items:center;gap:10px;">
+                                <span style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.08);
+                                             display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                </span>
+                                {{ $app->address }}
+                            </span>
                         @endif
 
                     </div>
                 </div>
             @endif
 
+
+            {{-- Col 2: روابط سريعة --}}
+            <div>
+                <h4 style="color:#fff;font-size:14px;font-weight:700;margin:0 0 20px;padding-bottom:10px;
+                           border-bottom:1px solid rgba(255,255,255,.1);">روابط سريعة</h4>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                    @if($app?->website_url)
+                        <a href="/app-page/click/website"
+                           style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;
+                                  display:flex;align-items:center;gap:8px;transition:color .2s;"
+                           onmouseover="this.style.color='rgba(255,255,255,1)'"
+                           onmouseout="this.style.color='rgba(255,255,255,.6)'">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            الموقع الرسمي
+                        </a>
+                    @endif
+                    @if($app?->google_play_url)
+                        <a href="/app-page/click/google"
+                           style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;
+                                  display:flex;align-items:center;gap:8px;"
+                           onmouseover="this.style.color='rgba(255,255,255,1)'"
+                           onmouseout="this.style.color='rgba(255,255,255,.6)'">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.37.2.8.2 1.17 0l11.5-6.64-2.58-2.58L3.18 23.76zm-1.05-1.36V1.6c0-.46.26-.87.65-1.08l11.1 11.1L2.78 22.72a1.17 1.17 0 0 1-.65-1.06v-.26zM20.82 10.5 17.5 8.6l-2.9 2.9 2.9 2.9 3.34-1.93a1.17 1.17 0 0 0 0-2.02zM4.35.24c-.37-.2-.8-.2-1.17 0L13.28 10.4 15.86 7.8 4.35.24z"/></svg>
+                            تحميل من Google Play
+                        </a>
+                    @endif
+                    @if($app?->apple_store_url)
+                        <a href="/app-page/click/apple"
+                           style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;
+                                  display:flex;align-items:center;gap:8px;"
+                           onmouseover="this.style.color='rgba(255,255,255,1)'"
+                           onmouseout="this.style.color='rgba(255,255,255,.6)'">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            تحميل من App Store
+                        </a>
+                    @endif
+                </div>
+            </div>
+
+            {{-- Col 3: تواصل معنا --}}
+            <div>
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                    @if($app?->logo)
+                        <img src="{{ asset('storage/'.$app->logo) }}"
+                             style="width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0;">
+                    @endif
+                    <span style="color:#fff;font-weight:700;font-size:18px;">
+                        {{ $app->name }}
+                    </span>
+                </div>
+
+{{--                @if($app?->description)--}}
+{{--                    <p style="color:rgba(255,255,255,.45);font-size:14px;line-height:1.9;margin:0 0 20px;max-width:340px;">--}}
+{{--                        {{ Str::limit($app->description, 120) }}--}}
+{{--                    </p>--}}
+{{--                @endif--}}
+
+{{--                --}}{{-- Download buttons mini --}}
+{{--                <div style="display:flex;flex-wrap:wrap;gap:10px;">--}}
+{{--                    @if($app?->google_play_url)--}}
+{{--                        <a href="/app-page/click/google"--}}
+{{--                           style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);--}}
+{{--                                  border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);--}}
+{{--                                  padding:8px 14px;border-radius:8px;font-size:13px;text-decoration:none;--}}
+{{--                                  transition:background .2s;"--}}
+{{--                           onmouseover="this.style.background='rgba(255,255,255,.14)'"--}}
+{{--                           onmouseout="this.style.background='rgba(255,255,255,.08)'">--}}
+{{--                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.37.2.8.2 1.17 0l11.5-6.64-2.58-2.58L3.18 23.76zm-1.05-1.36V1.6c0-.46.26-.87.65-1.08l11.1 11.1L2.78 22.72a1.17 1.17 0 0 1-.65-1.06v-.26zM20.82 10.5 17.5 8.6l-2.9 2.9 2.9 2.9 3.34-1.93a1.17 1.17 0 0 0 0-2.02zM4.35.24c-.37-.2-.8-.2-1.17 0L13.28 10.4 15.86 7.8 4.35.24z"/></svg>--}}
+{{--                            Google Play--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
+{{--                    @if($app?->apple_store_url)--}}
+{{--                        <a href="/app-page/click/apple"--}}
+{{--                           style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);--}}
+{{--                                  border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);--}}
+{{--                                  padding:8px 14px;border-radius:8px;font-size:13px;text-decoration:none;--}}
+{{--                                  transition:background .2s;"--}}
+{{--                           onmouseover="this.style.background='rgba(255,255,255,.14)'"--}}
+{{--                           onmouseout="this.style.background='rgba(255,255,255,.08)'">--}}
+{{--                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>--}}
+{{--                            App Store--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
+{{--                    @if($app?->direct_download_url)--}}
+{{--                        <a href="/app-page/click/download"--}}
+{{--                           style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);--}}
+{{--                                  border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);--}}
+{{--                                  padding:8px 14px;border-radius:8px;font-size:13px;text-decoration:none;"--}}
+{{--                           onmouseover="this.style.background='rgba(255,255,255,.14)'"--}}
+{{--                           onmouseout="this.style.background='rgba(255,255,255,.08)'">--}}
+{{--                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>--}}
+{{--                            تحميل مباشر--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+            </div>
+
         </div>
 
-        {{-- Divider --}}
-        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:20px;text-align:center;">
-            <p style="color:rgba(255,255,255,.3);font-size:13px;margin:0;">
+        {{-- Bottom bar --}}
+        <div style="border-top:1px solid rgba(255,255,255,.08);padding:20px 0;
+                    display:flex;align-items:center;justify-content:center;">
+            <p style="color:rgba(255,255,255,.25);font-size:13px;margin:0;">
                 © {{ date('Y') }} {{ $app->name }} &mdash; مدعوم من FutureX
             </p>
         </div>

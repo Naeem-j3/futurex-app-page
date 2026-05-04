@@ -118,9 +118,11 @@ class AppPageResource extends Resource
             // 🔹 Branding
             Forms\Components\Section::make('Branding')
                 ->schema([
-                    Forms\Components\ColorPicker::make('theme_color'),
+                    Forms\Components\ColorPicker::make('theme_color')
+                        ->default('#2563eb'),
 
-                    Forms\Components\ColorPicker::make('secondary_color'),
+                    Forms\Components\ColorPicker::make('secondary_color')
+                        ->default('#111827'),
                 ])->columns(2),
             Forms\Components\Section::make('App Screenshots')
                 ->schema([

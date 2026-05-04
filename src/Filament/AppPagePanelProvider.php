@@ -66,6 +66,7 @@ class AppPagePanelProvider extends PanelProvider
             ])
 
             ->authMiddleware([
+                \Filament\Http\Middleware\Authenticate::class,
                 \FutureX\AppPage\Http\Middleware\AuthorizeAdmin::class,
             ]);
     }

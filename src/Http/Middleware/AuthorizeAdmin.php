@@ -9,16 +9,14 @@ class AuthorizeAdmin
 {
     public function handle(Request $request, Closure $next)
     {
-        $user = auth()->user();
-
-        if (!$user) {
-            abort(403);
+        if (!auth()->check()) {
+            return redirect()->route('filament.app-page.auth.login');
         }
 
         $allowedEmails = config('app-page.allowed_emails', []);
 
-        if (!in_array($user->email, $allowedEmails)) {
-            abort(403);
+        if (!in_array(auth()->user()->email, $allowedEmails)) {
+            abort(403, 'Unauthorized');
         }
 
         return $next($request);
