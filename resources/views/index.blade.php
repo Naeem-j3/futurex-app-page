@@ -349,11 +349,11 @@
         <h1 style="font-size:clamp(32px,6vw,48px);font-weight:800;color:#fff;margin:0 0 16px;line-height:1.2;text-shadow:0 2px 10px rgba(0,0,0,0.2);">
             {{ $app->name ?? 'App Name' }}
         </h1>
-        @if($app?->description)
-            <p style="font-size:18px;color:rgba(255,255,255,.85);max-width:560px;margin:0 auto 36px;line-height:1.8;">
-                {{ $app->description }}
-            </p>
-        @endif
+{{--        @if($app?->description)--}}
+{{--            <p style="font-size:18px;color:rgba(255,255,255,.85);max-width:560px;margin:0 auto 36px;line-height:1.8;">--}}
+{{--                {{ $app->description }}--}}
+{{--            </p>--}}
+{{--        @endif--}}
         <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
             @if($app?->google_play_url)
                 <a href="/app-page/click/google" class="btn-primary">
