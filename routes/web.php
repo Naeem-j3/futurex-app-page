@@ -10,6 +10,7 @@ $prefix = config('app-page.route_prefix', 'app-page');
 
 Route::prefix($prefix)
     ->middleware('web')
+    ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])
     ->group(function () {
 
         // Landing Page
